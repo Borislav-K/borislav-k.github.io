@@ -1,7 +1,16 @@
 #main-header {
-    display: flex
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
 }
 
-ul {
+#navigation-list {
+    display: flex;
+    justify-content: space-evenly;
     list-style-type: none;
+
+}
+
+#navigation-list li {
+    padding: 0.15rem;
 }

@@ -1,7 +1,19 @@
+* {
+    font-family: OpenSymbol, sans-serif;
+}
+
+body {
+
+}
+
 #main-header {
     display: flex;
     justify-content: space-around;
     align-items: baseline;
+}
+
+h1 {
+    font-size: 2rem;
 }
 
 #navigation-list {
@@ -13,4 +25,8 @@
 
 #navigation-list li {
     padding: 0.15rem;
+}
+
+a {
+    text-decoration: none;
 }

@@ -40,3 +40,7 @@ a {
 a:hover, h1:hover {
     color: #9DA7B3;
 }
+
+.centered-text {
+    text-align: center;
+}

@@ -41,6 +41,23 @@ a:hover, h1:hover {
     color: #9DA7B3;
 }
 
-.centered-text {
+#greetings-section {
     text-align: center;
+    margin-top: 5rem;
+}
+
+#greetings-section img{
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
+#greetings-section figcaption {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.email-address-text {
+    font-weight: bold;
+    color: darkorange;
 }

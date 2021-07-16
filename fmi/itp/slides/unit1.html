@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Unit 1 - Introduction</title>
+
+    <link rel="stylesheet" href="../revealjs/dist/reset.css">
+    <link rel="stylesheet" href="../revealjs/dist/reveal.css">
+    <link rel="stylesheet" href="../revealjs/dist/theme/black.css">
+    <link rel="stylesheet" href="../revealjs/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../../../styles/itp-fmi.css">
+    <script src="../revealjs/plugin/highlight/highlight.js"></script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Unit 1 - Introduction to Programming</h2>
+            <img data-src="../../../images/computing-monkey.jpg" alt="Computing monkey">
+        </section>
+        <section>
+            <section>What does programming mean?</section>
+            <section>It is the process of creating computer programs</section>
+            <section>What is a computer program?</section>
+            <section>It is a sequence of instructions to the computer, telling it what to do</section>
+            <section>How does one create a computer program?</section>
+            <section>
+                In order to create a computer program, a programming language is used in order to give the instructions
+                to the computer in a language it can understand.
+            </section>
+            <section>
+                <p>There are several types of programming languages. For now, we will separate them into 2 main types:</p>
+                <ul>
+                    <li>Low-level languages</li>
+                    <li>High-level languages</li>
+                </ul>
+            </section>
+            <section>
+                A high-level language is closer to the human way of communication, while a low-level language is more
+                similar to what the computer can understand
+            </section>
+            <section>
+                Programmers (usually) write in a high-level language. Their
+                <span class="important-text">source code</span> is transformed to the lowest level language, called
+                <span class="important-text">machine language</span>, so that the computer can carry out the instructions
+            </section>
+            <section>
+                <p>3 more questions arise:</p>
+                <ol>
+                    <li>What is source code?</li>
+                    <li>What is machine language and how does the computer execute it?</li>
+                    <li>How does my source code get transformed to machine language?</li>
+                </ol>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>What does source code look like?</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+                   #include <iostream>
+
+                   using namespace std;
+                   int main() {
+                   	int a, b;
+                   	cout << "Enter two numbers: ";
+                   	cin >> a >> b;
+                   	cout << "Their sum is " << a + b << endl;
+                   	return 0;
+                   }
+                </script></code></pre>
+            </section>
+            <section>
+                <p>And how does that get transformed into machine language?</p>
+            </section>
+            <section>
+                <p>Enter compilation</p>
+            </section>
+        </section>
+        <section>
+            <p>Thank you</p>
+            <a href="#/0" class="r-fit-text">Go back to the first slide</a>
+        </section>
+    </div>
+</div>
+<script src="../revealjs/dist/reveal.js"></script>
+<script src="../revealjs/plugin/notes/notes.js"></script>
+<script src="../revealjs/plugin/markdown/markdown.js"></script>
+<script src="../revealjs/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
+</html>

@@ -1,23 +1,59 @@
 section h1 {
     margin-top: 2rem;
     text-align: center;
+    color: #9DA7B3 !important;
 }
 
 #units-container {
-    margin-top: 2rem;
+    margin: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
     place-items: center;
 }
 
+.unit-instance {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.unit-instance h1 {
+    margin-bottom: 1rem;
+}
+
 .unit-instance nav {
+    width: 100%;
     display: flex;
     justify-content: space-evenly;
     margin-top: 0.5rem;
 }
 
+.unit-instance nav a {
+    color: #96bbde;
+}
+
+.unit-instance img {
+    width: 150px;
+    height: 150px;
+}
+
 .important-text {
     font-weight: bold;
     color: darkorange;
+}
+
+.source-reference {
+    color: grey;
+    font-size: 1rem;
+    text-align: right;
+}
+
+.source-reference:before {
+    content: "*"
+}
+
+#last-page-nav {
+    display: flex;
+    justify-content: space-evenly;
 }

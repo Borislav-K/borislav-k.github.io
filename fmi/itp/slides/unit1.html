@@ -21,14 +21,26 @@
             <img data-src="../../../images/computing-monkey.jpg" alt="Computing monkey">
         </section>
         <section>
-            <section>What does programming mean?</section>
-            <section>It is the process of creating computer programs</section>
-            <section>What is a computer program?</section>
-            <section>It is a sequence of instructions to the computer, telling it what to do</section>
-            <section>How does one create a computer program?</section>
             <section>
-                In order to create a computer program, a programming language is used in order to give the instructions
-                to the computer in a language it can understand.
+                <p>What does <span class="important-text">programming</span> mean?</p>
+            </section>
+            <section>
+                <p>It is the process of creating <span class="important-text">computer programs</span></p>
+            </section>
+            <section>
+                <p>What is a computer program?</p>
+            </section>
+            <section>
+                <p>It is a sequence of instructions to the computer, telling it what to do</p>
+            </section>
+            <section>
+                <p>How does one create a computer program?</p>
+            </section>
+            <section>
+                <p>In order to create a computer program, a
+                    <span class="important-text">programming language</span> is used in order to give the instructions
+                    to the computer in a language it can understand.
+                </p>
             </section>
             <section>
                 <p>There are several types of programming languages. For now, we will separate them into 2 main types:</p>
@@ -38,8 +50,9 @@
                 </ul>
             </section>
             <section>
-                A high-level language is closer to the human way of communication, while a low-level language is more
-                similar to what the computer can understand
+                <p>A high-level language is closer to the human way of communication, while a low-level language is more
+                    similar to what the computer can understand
+                </p>
             </section>
             <section>
                 Programmers (usually) write in a high-level language. Their
@@ -50,8 +63,8 @@
                 <p>3 more questions arise:</p>
                 <ol>
                     <li>What is source code?</li>
-                    <li>What is machine language and how does the computer execute it?</li>
                     <li>How does my source code get transformed to machine language?</li>
+                    <li>What is machine language and how does the computer execute it?</li>
                 </ol>
             </section>
         </section>
@@ -63,10 +76,7 @@
 
                    using namespace std;
                    int main() {
-                   	int a, b;
-                   	cout << "Enter two numbers: ";
-                   	cin >> a >> b;
-                   	cout << "Their sum is " << a + b << endl;
+                   	cout << "Hello, C++" << endl;
                    	return 0;
                    }
                 </script></code></pre>
@@ -75,12 +85,87 @@
                 <p>And how does that get transformed into machine language?</p>
             </section>
             <section>
-                <p>Enter compilation</p>
+                <p>It has to undergo the processes of <span class="important-text">preprocessing</span>,
+                    <span class="important-text">compilation</span> and <span class="important-text">linking</span></p>
             </section>
         </section>
         <section>
-            <p>Thank you</p>
-            <a href="#/0" class="r-fit-text">Go back to the first slide</a>
+            <section>
+                <p>Compilation is the process of transforming a program written in a high-level programming language
+                    (its source code) into <span class="important-text">object code</span></p>
+                <p>Object code is the product of compilation. Multiple object files are <span class="important-text">
+                    linked</span> by a program called the linker into an .exe file (on windows OS) or a library file, that
+                    can be reused by an executable</p>
+            </section>
+            <section>
+                <img src="../../../images/cpp-compilation.png" alt="C++ compilation">
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>...You also mentioned machine code?</p>
+            </section>
+            <section>
+                <p>Machine code consists of machine language instructions. It is used to directly "speak" to a computer's
+                    <span class="important-text">CPU</span>
+                </p>
+            </section>
+            <section>
+                <p>And here is example machine code for adding the numbers 1234 and 4321</p>
+                <img src="../../../images/machine_code.png" alt="Machine code example">
+                <p class="source-reference">Image taken from <a href="https://www.dspguide.com/ch4/5.htm">
+                    The Scientist and Engineer's Guide to Digital Signal Processing</a>, By Steven W. Smith</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>Machine code, as everything a computer is able to read is in the <span class="important-text">
+                binary numeral system</span></p>
+            </section>
+            <section>
+                <p>A numeral system is just a way of writing numbers with symbols</p>
+            </section>
+            <section>
+                <p>We commonly use the decimal numeral system, which consists of the digits 0-9</p>
+                <p>Binary numbers consist of only 2 digits (0 and 1), hence the name</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>Converting decimal to binary</p>
+                <ol>
+                    <li>Divide the number by 2</li>
+                    <li>Get the integer quotient for the next iteration</li>
+                    <li>Use the remainder as a binary digit</li>
+                    <li>Repeat the steps until the quotient is 0</li>
+                </ol>
+            </section>
+            <section>
+                <p>Converting the decimal number 13 to binary:</p>
+                <img src="../../../images/decimal-to-binary.png" alt="Decimal to binary example">
+            </section>
+            <section>
+                <p>Converting binary to decimal</p>
+                <p>For binary number with n digits: d<sub>n-1</sub>...d<sub>2</sub>d<sub>1</sub>d<sub>0</sub></p>
+                <p>The decimal number is equal to the sum of binary digits times their power of 2 (2<sup>n</sup>):
+                </p>
+            </section>
+            <section>
+                <p>Converting the binary number 111001 to decimal</p>
+                <img src="../../../images/binary-to-decimal.png" alt="Binary to decimal example">
+                <p>
+                    111001<sub>(2)</sub> =
+                    1⋅2<sup>5</sup>+1⋅2<sup>4</sup>+1⋅2<sup>3</sup>+0⋅2<sup>2</sup>+0⋅2<sup>1</sup>+1⋅2<sup>0</sup>
+                    = 57<sub>(10)</sub>
+                </p>
+            </section>
+        </section>
+        <section>
+            <p>That was it :)</p>
+            <div id="last-page-nav">
+                <a href="#/0">First slide</a>
+                <a href="..">Course main page</a>
+            </div>
         </section>
     </div>
 </div>

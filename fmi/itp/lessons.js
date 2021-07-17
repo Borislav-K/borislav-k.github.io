@@ -3,19 +3,25 @@ window.addEventListener('DOMContentLoaded', () => {
     const units = [
         {
             number: 1,
-            title: "Unit 1 title TODO"
+            title: "Introduction to Programming",
+            iconPath: "../../images/computing-monkey.jpg",
+            hasProblems: false,
         },
         {
             number: 2,
-            title: "Unit 2 title TODO"
+            title: "Introduction to C++",
+            iconPath: "../../images/c++-logo.png",
+            hasProblems: true,
         },
         {
             number: 3,
-            title: "Unit 3 title TODO"
+            title: "Unit 3 title TODO",
+            hasProblems: false,
         },
         {
             number: 4,
-            title: "Unit 4 title TODO"
+            title: "Unit 4 title TODO",
+            hasProblems: false,
         }
     ];
 
@@ -31,18 +37,25 @@ createUnitSection = (unit) => {
     const unitHeader = document.createElement('h1');
     unitHeader.innerText = `Unit ${unit.number} - ${unit.title}`;
 
+    const unitImage = document.createElement("img");
+    unitImage.src = unit.iconPath;
+    unitImage.alt = `${unit.title} icon`;
+
+    const linksContainer = document.createElement('nav');
+
     const slidesLink = document.createElement('a');
     slidesLink.setAttribute('href', `slides/unit${unit.number}.html`);
     slidesLink.innerText = 'Slides';
+    linksContainer.append(slidesLink);
 
-    const problemsLink = document.createElement('a');
-    problemsLink.setAttribute('href', 'TODO');
-    problemsLink.innerText = 'Problems';
+    if (unit.hasProblems) {
+        const problemsLink = document.createElement('a');
+        problemsLink.setAttribute('href', 'TODO');
+        problemsLink.innerText = 'Problems';
+        linksContainer.append(problemsLink);
+    }
 
-    const linksContainer = document.createElement('nav');
-    linksContainer.append(slidesLink, problemsLink);
-
-    unitSection.append(unitHeader, linksContainer);
+    unitSection.append(unitHeader, unitImage, linksContainer);
 
     return unitSection;
 }

@@ -52,3 +52,8 @@ section h1 {
 .source-reference:before {
     content: "*"
 }
+
+#last-page-nav {
+    display: flex;
+    justify-content: space-evenly;
+}

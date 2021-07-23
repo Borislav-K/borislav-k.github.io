@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Unit 3 - Conditional operators</title>
+
+    <link rel="stylesheet" href="../revealjs/dist/reset.css">
+    <link rel="stylesheet" href="../revealjs/dist/reveal.css">
+    <link rel="stylesheet" href="../revealjs/dist/theme/black.css">
+    <link rel="stylesheet" href="../revealjs/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../../../styles/itp-fmi.css">
+    <script src="../revealjs/plugin/highlight/highlight.js"></script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Unit 3 - Conditional Operators</h2>
+            <img data-src="../../../images/control-flow.png" alt="C++ logo">
+            <div class="source-reference">Image taken from javatpoint</div>
+        </section>
+        <section>
+            <section>
+                <h3>Scopes</h3>
+                <p>A
+                    <span class="important-text">scope</span> is a section of a C++ program, which has the following semantics:
+                </p>
+                <ul>
+                    <li>
+                        Any variable defined within a scope is visible only within that scope
+                    </li>
+                    <li>
+                        A variable with the same name cannot be redefined in the same scope
+                    </li>
+                    <li>
+                        A definition of a variable in a nested scope
+                        <span class="important-text">shadows</span> all the definitions of variables with the same name
+                        in the enclosing scopes
+                    </li>
+                </ul>
+            </section>
+            <section>
+            <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int a = 1;
+
+int main() {
+	cout << a << endl; // Prints 1
+	int a = 2;
+	cout << a << endl; // Prints 2
+
+	{
+		int a = 3;
+		cout << a << endl; // Prints 3
+		{
+			int a = 4;
+			cout << a << endl; // Prints 4
+		}
+		cout << a << endl; // Prints 3
+	}
+
+	cout << a << endl; // Prints 2
+
+	//int a = 5; // Compilation error
+}
+            </script></code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>The <span class="important-text">if-else</span> operator</h3>
+                <p>The <span class="important-text">if-else</span> operator is used to branch the execution of a program
+                    into several possible pathways, depending on a boolean value</p>
+            </section>
+            <section>
+                <p>Long syntax</p>
+                <pre><code data-trim>
+                    if(condition) {
+                      statementsIfTrue;
+                    } else {
+                      statementsIfFalse;
+                    }
+                </code></pre>
+                <p>Short syntax</p>
+                <pre><code data-trim>
+                    if(condition) {
+                      statementsIfTrue;
+                    }
+                </code></pre>
+                <p>The block operator is needed only if the enclosed statements are more than 1</p>
+            </section>
+            <section>
+                <p>Example</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int age;
+	cout << "Welcome to our club\n";
+	cout << "Enter your age: ";
+	cin >> age;
+
+	if (age < 18) {
+		cout << "Get out!\n";
+	} else {
+		cout << "Have fun! :)\n";
+	}
+}
+                </script></code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>The <span class="important-text">ternary conditional</span> operator</p>
+                <pre><code data-trim>
+                    predicate ? valueIfTrue : valueIfFalse
+                </code></pre>
+                <ul>
+                    <li>If predicate is true, the whole expression evaluates to valueIfTrue</li>
+                    <li>If predicate is false, the whole experession evaluates to valueIfFalse</li>
+                </ul>
+            </section>
+            <section>
+                <p>Example</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int age;
+	cout << "Welcome to our club\n";
+	cout << "Enter your age: ";
+	cin >> age;
+
+	cout << (age < 18 ? "Get out!\n" : "Have fun! :)\n");
+}
+                </script></code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>The <span class="important-text">switch</span> operator</h3>
+            </section>
+            <section>
+                <p>Consider the following code fragment</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int dayIndex;
+	cout << "Enter the number of a day of the week: ";
+	cin >> dayIndex;
+
+	if (dayIndex == 1) {
+		cout << "Monday\n";
+	} else if (dayIndex == 2) {
+		cout << "Tuesday\n";
+	} else if (dayIndex == 3) {
+		cout << "Wednesday\n";
+	} else if (dayIndex == 4) {
+		cout << "Thursday\n";
+	} else if (dayIndex == 5) {
+		cout << "Friday\n";
+	} else if (dayIndex == 6) {
+		cout << "Saturday\n";
+	} else if (dayIndex == 7) {
+		cout << "Sunday\n";
+	} else {
+		cout << "You must enter a valid day index (1-7)\n";
+	}
+
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>It could be rewritten as</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int dayIndex;
+	cout << "Enter the number of a day of the week: ";
+	cin >> dayIndex;
+
+	switch (dayIndex) {
+	case 1: cout << "Monday\n";
+	case 2: cout << "Tuesday\n";
+	case 3: cout << "Wednesday\n";
+	case 4: cout << "Thursday\n";
+	case 5: cout << "Friday\n";
+	case 6: cout << "Saturday\n";
+	case 7: cout << "Sunday\n";
+	default: cout << "You must enter a valid day index (1-7)\n";
+	}
+
+}
+                </script></code></pre>
+                <p>Which is more readable and straightforward</p>
+            </section>
+            <section>
+                <p>Wait... What?</p>
+                <img src="../../../images/switch-mistake.png" alt="Unexpected result">
+            </section>
+            <section>
+                <p>The switch statement's default behaviour is to execute all following cases after it meets a match.</p>
+                <p>
+                    To prevent this, we use the <span class="important-text">break</span> control statement
+                </p>
+                <p>A break statement tells the compiler that we are done executing statements within the switch,
+                    and that execution should continue with the statement after the end of the switch block.</p>
+            </section>
+            <section>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+
+#include <iostream>
+using namespace std;
+
+int main() {
+	int dayIndex;
+	cout << "Enter the number of a day of the week: ";
+	cin >> dayIndex;
+
+	switch (dayIndex) {
+	case 1: cout << "Monday\n"; break;
+	case 2: cout << "Tuesday\n"; break;
+	case 3: cout << "Wednesday\n"; break;
+	case 4: cout << "Thursday\n"; break;
+	case 5: cout << "Friday\n"; break;
+	case 6: cout << "Saturday\n"; break;
+	case 7: cout << "Sunday\n"; break;
+	default: cout << "You must enter a valid day index (1-7)\n";
+	}
+
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>This time we get the desired behaviour</p>
+                <img src="../../../images/switch-mistake-fix.png" alt="Desired switch behaviour">
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Enum</h2>
+            </section>
+            <section>
+                <p>C++ allows defining our own data types. Perhaps the simplest one is
+                    <span class="important-text">enum</span>.
+                </p>
+                <p>An <span class="important-text">enumerated type (enum)</span>
+                    is a data type where every possible value is defined as a symbolic constant.
+                </p>
+                <p>Each enumerator is assigned an integer value, starting from 0</p>
+            </section>
+            <section>
+                <p>Example</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+                enum Day {
+                MONDAY,
+                TUESDAY,
+                WEDNESDAY,
+                THURSDAY,
+                FRIDAY,
+                SATURDAY,
+                SUNDAY
+                };
+
+                int main() {
+                  std::cout << WEDNESDAY; // Prints 2
+                }
+</script></code></pre>
+            </section>
+            <section>
+                <p>Switch and enums</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+enum Day {
+	MONDAY,
+	TUESDAY,
+	WEDNESDAY,
+	THURSDAY,
+	FRIDAY,
+	SATURDAY,
+	SUNDAY
+};
+
+int main() {
+	int dayIndex;
+	cout << "Enter the number of a day of the week: ";
+	cin >> dayIndex;
+
+	switch (dayIndex) {
+	case MONDAY: cout << "Monday\n"; break;
+	case TUESDAY: cout << "Tuesday\n"; break;
+	case WEDNESDAY: cout << "Wednesday\n"; break;
+	case THURSDAY: cout << "Thursday\n"; break;
+	case FRIDAY: cout << "Friday\n"; break;
+	case SATURDAY: cout << "Saturday\n"; break;
+	case SUNDAY: cout << "Sunday\n"; break;
+	default: cout << "You must enter a valid day index (0-6)\n";
+	}
+
+}
+                </script></code></pre>
+            </section>
+        </section>
+        <section>
+            <p>That was it :)</p>
+            <div id="last-page-nav">
+                <a href="#/0">First slide</a>
+                <a href="..">Course main page</a>
+                <a href="https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit3/problems.md">Problems</a>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="../revealjs/dist/reveal.js"></script>
+<script src="../revealjs/plugin/notes/notes.js"></script>
+<script src="../revealjs/plugin/markdown/markdown.js"></script>
+<script src="../revealjs/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
+</html>

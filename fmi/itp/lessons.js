@@ -14,11 +14,9 @@ window.addEventListener('DOMContentLoaded', () => {
         },
         {
             number: 3,
-            title: "Unit 3 title TODO",
-        },
-        {
-            number: 4,
-            title: "Unit 4 title TODO",
+            title: "Conditional operators",
+            iconPath: "../../images/control-flow.png",
+            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit3/problems.md"
         }
     ];
 

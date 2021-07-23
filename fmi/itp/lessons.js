@@ -5,23 +5,20 @@ window.addEventListener('DOMContentLoaded', () => {
             number: 1,
             title: "Introduction to Programming",
             iconPath: "../../images/computing-monkey.jpg",
-            hasProblems: false,
         },
         {
             number: 2,
             title: "Introduction to C++",
             iconPath: "../../images/c++-logo.png",
-            hasProblems: true,
+            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit2/problems.md",
         },
         {
             number: 3,
             title: "Unit 3 title TODO",
-            hasProblems: false,
         },
         {
             number: 4,
             title: "Unit 4 title TODO",
-            hasProblems: false,
         }
     ];
 
@@ -48,9 +45,9 @@ createUnitSection = (unit) => {
     slidesLink.innerText = 'Slides';
     linksContainer.append(slidesLink);
 
-    if (unit.hasProblems) {
+    if (unit.problemsLink) {
         const problemsLink = document.createElement('a');
-        problemsLink.setAttribute('href', 'TODO');
+        problemsLink.setAttribute('href', unit.problemsLink);
         problemsLink.innerText = 'Problems';
         linksContainer.append(problemsLink);
     }

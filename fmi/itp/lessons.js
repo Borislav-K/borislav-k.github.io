@@ -23,6 +23,12 @@ window.addEventListener('DOMContentLoaded', () => {
             title: "Loops",
             iconPath: "../../images/loop.png",
             problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit4/problems.md"
+        },
+        {
+            number: 5,
+            title: "Loops continued",
+            iconPath: "../../images/loop.png",
+            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit4/problems.md"
         }
     ];
 

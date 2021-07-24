@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Unit 3 - Conditional operators</title>
+    <title>Unit 4 - Loops</title>
 
     <link rel="stylesheet" href="../revealjs/dist/reset.css">
     <link rel="stylesheet" href="../revealjs/dist/reveal.css">
@@ -19,6 +19,266 @@
         <section>
             <h2>Unit 4 - Loops</h2>
             <img data-src="../../../images/loop.png" alt="Loop image">
+        </section>
+        <section>
+            <section>
+                <p>Suppose you were asked to create a program that sums 2 numbers given by the user and prints them</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+                #include <iostream>
+                using namespace std;
+
+                int main() {
+                    int a,b;
+                    cin >> a >> b;
+                    cout << a + b << endl;
+                    return 0;
+                }
+                </script></code></pre>
+                <p>Easy, right?</p>
+            </section>
+            <section>
+                <p>Let's spice things up. Make the numbers' count 5</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+                #include <iostream>
+                using namespace std;
+
+                int main() {
+                    int a, b, c, d, e;
+                    cin >> a >> b >> c >> d >> e;
+                    cout << a + b + c + d + e<< endl;
+                    return 0;
+                }
+                </script></code></pre>
+                <p>Still easy, right?</p>
+            </section>
+            <section>
+                <p>Now, sum 10 numbers</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+                #include <iostream>
+                using namespace std;
+
+                int main() {
+                    int a1, a2, a3, a4, a5, a6, a7, a8, a9, a10;
+                    cin >> a1 >> a2 >> a3 >> a4 >> a5 >> a6 >> a7 >> a8 >> a9 >> a10;
+                    cout << a1 + a2 + a3 + a4 + a5 + a6 + a7 + a8 + a9 + a10 << endl;
+                    return 0;
+                }
+                </script></code></pre>
+                <p>Still possible, but things are starting to become ugly.</p>
+            </section>
+            <section>
+                <p>... Now sum 100 numbers</p>
+            </section>
+            <section>
+                <p>Nobody would write a program analogous to the previous ones with 100 variables.</p>
+                <p>What if you were asked to read a number N from the console and then read N more numbers and print their sum?</p>
+                <p>That would be impossible with this approach</p>
+                <p>That's why programming languages have <span class="important-text">loops</span></p>
+            </section>
+        </section>
+        <section>
+            <p>A <span class="important-text">loop</span> is a section of the code that get executed as many times as we
+                need, without duplicating the code statements that many times</p>
+        </section>
+        <section>
+            <section>
+                <p>
+                    The <span class="important-text">while</span> statement (also called a
+                    <span class="important-text">while loop</span>) is the simplest of the 3 loop types in C++.
+                </p>
+                <pre><code data-trim>
+                    while (condition) {
+                        statements;
+                    }
+                </code></pre>
+                <p>Analogous to the if-statement, the bracers are optional when there is 1 statement only.</p>
+            </section>
+            <section>
+                <p>Let's solve the problem that was not solvable until now</p>
+                <pre><code data-line-numbers data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int N;
+	cin >> N;
+
+	int sum = 0;
+	int buffer;
+	while (N > 0) {
+		cin >> buffer;
+		sum += buffer;
+
+		N = N - 1;
+	}
+
+	cout << "The sum is " << sum << endl;
+	return 0;
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>We can simplify this code a little</p>
+                <pre><code data-line-numbers data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int N;
+	cin >> N;
+
+	int sum = 0;
+	int buffer;
+	while (N--) {
+		cin >> buffer;
+		sum += buffer;
+	}
+
+	cout << "The sum is " << sum << endl;
+	return 0;
+}
+                </script></code></pre>
+                <p>This is possible because true and false are just aliases for 1 and 0</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>The <span class="important-text">++</span> operator</p>
+                <pre><code data-trim>
+                x = x + 1;
+                x++; // Same as the previous line
+            </code></pre>
+            </section>
+            <section>
+                <p>Difference between <span class="important-text">++x</span> and
+                    <span class="important-text">x++</span></p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int x = 1;
+
+	cout << x++ << endl; // Prints 1
+	cout << x << endl; // Prints 2
+	cout << ++x << endl; // Prints 3
+	cout << x << endl; // Prints 3
+
+	++x = 5; // OK, x gets increased to 4 and then gets assigned the value 5
+	x++ = 5; // Compilation error
+}
+
+                </script></code></pre>
+            </section>
+            <section>
+                <p>The <span class="important-text">postfix ++</span> operator creates a copy of the variable,
+                    increments the variable and returns the copy (which was not incremented)
+                </p>
+                <p>The <span class="important-text">prefix ++</span> operator increments the value of the variable by 1
+                    and returns the same variable, without making a copy. (It actually returns a reference, but you do
+                    not need to worry about that now)
+                </p>
+            </section>
+            <section>
+                <p>++x returns an <span class="important-text">lvalue</span> - a place in memory which can be changed
+                    by following statements
+                </p>
+                <p>x++ returns an
+                    <span class="important-text">rvalue</span> - a temporary value (literal) which does
+                    not have a memory address and serves as an intermediate operand for some calculation</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>
+                    The <span class="important-text">do-while</span> loop is nearly the same as the while loop, with the
+                    exception that the loop statements get executed at least once
+                </p>
+                <pre><code data-trim>
+                    do {
+                        statements;
+                    } while (condition);
+                </code></pre>
+            </section>
+            <section>
+                <p>Here is our previous problem solved with the do-while loop</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int N;
+	cin >> N;
+
+	int sum = 0;
+	int buffer;
+	do {
+		cin >> buffer;
+		sum += buffer;
+	} while (--N);
+
+	cout << "The sum is " << sum << endl;
+}
+
+                </script></code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>
+                    The <span class="important-text">for</span> loop is probably the most utilized loop statement in C++
+                <p>
+                <pre><code data-trim>
+                for (initialization; condition; correction) {
+                    statements;
+                }
+                </code></pre>
+                <p>It is useful when we want to execute a piece of code exactly N times</p>
+            </section>
+            <section>
+                <p>Our well-known problem solved with the for loop</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int N;
+	cin >> N;
+
+	int sum = 0;
+	int buffer;
+
+	for (int i = 1; i <= N; i++) {
+		cin >> buffer;
+		sum += buffer;
+	}
+
+	cout << "The sum is " << sum << endl;
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>We could also leave some of the statements empty</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+                #include <iostream>
+                using namespace std;
+
+                int main() {
+                int N;
+                cin >> N;
+
+                int sum = 0;
+                int buffer;
+
+                for (; N > 0; N--) {
+                    cin >> buffer;
+                    sum += buffer;
+                }
+
+                cout << "The sum is " << sum << endl;
+                }
+                </script></code></pre>
+            </section>
         </section>
         <section>
             <p>That was it :)</p>

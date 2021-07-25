@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Unit 6 - Introduction to Arrays</title>
+
+    <link rel="stylesheet" href="../revealjs/dist/reset.css">
+    <link rel="stylesheet" href="../revealjs/dist/reveal.css">
+    <link rel="stylesheet" href="../revealjs/dist/theme/black.css">
+    <link rel="stylesheet" href="../revealjs/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../../../styles/itp-fmi.css">
+    <script src="../revealjs/plugin/highlight/highlight.js"></script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Unit 6 - Introduction to Arrays</h2>
+            <img style="width: 512px; height: 256px" data-src="../../../images/arrays_logo.png" alt="Array logo">
+        </section>
+        <section>
+            <section>
+                <p>
+                    Consider having to create a program that maintains marks for 30 students (marks have values 0-6) and
+                    allowing the user to query a mark and change the mark for a student
+                </p>
+            </section>
+            <section>
+                <p>
+                    With the primitive data types that we discussed up until now, how would you solve it?
+                </p>
+            </section>
+            <section>
+                <p>
+                    You would probably have 30 variables, each for a student's mark and whenever the user queries/updates
+                    a mark, you would have an if/switch statement with 30 possible branches
+                </p>
+            </section>
+            <section>
+                <p>This is an inefficient, unreadable, error-prone, and fortunately a solution we do not have to create</p>
+            </section>
+            <section>
+                <p>Instead, we will learn about
+                    <span class="important-text">arrays</span>, which are an aggregate data type
+                    that will allow us to easily store, update and query the students' marks</p>
+            </section>
+        </section>
+        <section>
+            <p>
+                An <span class="important-text">array</span> is an aggregate data type, which represents a finite list
+                of elements from the same type. It allows to query/update every element by its index
+            </p>
+        </section>
+        <section>
+            <p>Examples</p>
+            <pre><code data-trim data-line-numbers>
+                int main() {
+                    int arr[5]; // Declare an array of 5 elements of type int
+                    double numsArr[3] = { 0.05, 1.75, 100.22 }; // Declare and initialize an array of 3 doubles with their values
+                    int arr2[5] = { 5, 3, 8 } // Same as int arr[2] = { 5, 3, 8, 0, 0 }
+                    arr2[0] = 1; // arr2 now contains values { 1, 3, 8, 0, 0 }
+                    cout << arr[2]; // Prints 8
+                    return 0;
+                }
+            </code></pre>
+        </section>
+        <section>
+            <p>
+                The <span class="important-text">cin</span> operator is not defined for arrays.
+                The <span class="important-text">cout</span> operator prints the memory address of an array
+            </p>
+            <p>
+                However, they can be used for specific array elements, for example arr[3], with the well-known behaviour
+            </p>
+        </section>
+        <section>
+            <p>The physical representation of an array in memory is a continuous block of memory</p>
+            <pre><code data-trim>
+                int a[5] = {1, 2, 3};
+            </code></pre>
+            <img data-src="../../../images/array_memory_representation.png" alt="Array memory representation">
+            <p class="important-text">Array indexes start from 0!</p>
+        </section>
+        <section>
+            <section>
+                <p>Now that we know of these arrays, let's solve our problem</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+const int PRINT_ALL_MARKS = 1; // Print all students' marks
+const int PRINT_STUDENT_MARK = 2; // Print a specific student's mark
+const int CHANGE_STUDENT_MARK = 3; // Change a specific student's mark
+
+void printMenu() {
+	cout << "\tMENU\n";
+	cout << "1 - print all current marks\n";
+	cout << "2 - print a mark for a specific student\n";
+	cout << "3 - change a specific student's mark\n";
+	cout << "Other - exit\n";
+}
+
+void printAllMarks(int marks[]) {
+	for (int i = 0; i < 30; i++) {
+		cout << "Student " << i << ": " << marks[i] << endl;
+	}
+}
+
+void printStudentMark(int marks[]) {
+	cout << "Which student's mark do you wish to check? (0-29): ";
+	int studentIndex;
+	cin >> studentIndex;
+	cout << "Student " << studentIndex << "'s mark is " << marks[studentIndex] << endl;
+}
+
+void changeStudentMark(int marks[]) {
+	cout << "Which student's mark do you wish to change? (0-29): ";
+	int studentIndex;
+	cin >> studentIndex;
+	cout << "Student " << studentIndex << "'s current mark is " << marks[studentIndex] << "\n Please enter a new mark: ";
+	cin >> marks[studentIndex];
+}
+
+int main() {
+	int marks[30];
+	printMenu();
+
+	int cmd;
+	while (true) {
+		cout << "Enter your command: ";
+		cin >> cmd;
+		switch (cmd) {
+		case PRINT_ALL_MARKS: printAllMarks(marks); break;
+		case PRINT_STUDENT_MARK: printStudentMark(marks); break;
+		case CHANGE_STUDENT_MARK: changeStudentMark(marks); break;
+		default: return 0;
+		}
+	}
+}
+            </script></code></pre>
+            </section>
+            <section>
+                <p>
+                    Have in mind that this is quite a primitive solution. The constants representing the command numbers could
+                    be extracted into an enum
+                </p>
+                <p>
+                    Also, we don't perform any validations for the entered indices/marks whatsoever
+                </p>
+            </section>
+            <section>
+                <p>Wonder what could go wrong? Try printing student 100000's mark</p>
+                <img data-src="../../../images/array_out_of_bounds.png" alt="Array out of bounds exception">
+                <p>
+                    This is called an <span class="important-text">exception</span>. It is out of the course's scope, but
+                    remember that your code must never throw exceptions in such a manner, as the program has to terminate.
+                </p>
+            </section>
+        </section>
+        <section>
+            <p>That was it :)</p>
+            <div id="last-page-nav">
+                <a href="#/0">First slide</a>
+                <a href="..">Course main page</a>
+                <a href="https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit6/problems.md">Problems</a>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="../revealjs/dist/reveal.js"></script>
+<script src="../revealjs/plugin/notes/notes.js"></script>
+<script src="../revealjs/plugin/markdown/markdown.js"></script>
+<script src="../revealjs/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
+</html>

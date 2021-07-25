@@ -29,6 +29,12 @@ window.addEventListener('DOMContentLoaded', () => {
             title: "Introduction to Functions",
             iconPath: "../../images/function_logo.png",
             problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit5/problems.md"
+        },
+        {
+            number: 6,
+            title: "Introduction to Arrays",
+            iconPath: "../../images/arrays_logo.png",
+            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit6/problems.md"
         }
     ];
 

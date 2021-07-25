@@ -26,8 +26,8 @@ window.addEventListener('DOMContentLoaded', () => {
         },
         {
             number: 5,
-            title: "Loops continued",
-            iconPath: "../../images/loop.png",
+            title: "Introduction to Functions",
+            iconPath: "../../images/function_logo.png",
             problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit5/problems.md"
         }
     ];

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Unit 5 - Loops Continued</title>
+    <title>Unit 5 - Introduction to Functions</title>
 
     <link rel="stylesheet" href="../revealjs/dist/reset.css">
     <link rel="stylesheet" href="../revealjs/dist/reveal.css">
@@ -17,13 +17,212 @@
 <div class="reveal">
     <div class="slides">
         <section>
-            <h2>Unit 5 - Loops Continued</h2>
-            <img data-src="../../../images/loop.png" alt="Loop image">
+            <h2>Unit 5 - Introduction to Functions</h2>
+            <img style="width: 512px; height: 256px" data-src="../../../images/function_logo.png" alt="Function logo">
         </section>
-        <section>TODO infinite loops (show with for and while)</section>
-        <section>TODO nested loops and break statements inside loops</section>
         <section>
-            casting (prev presentation - slide 26, also see bookmarked video); Start from slide 26
+            <section>
+                <p>
+                    A <span class="important-text">function</span> is a reusable sequence of statements designed to do a
+                    particular job
+                </p>
+            </section>
+            <section>
+                <p>Every program needs to have a function called <span class="important-text">main</span></p>
+            </section>
+            <section>
+                <p>
+                    However, as programs start getting longer and longer, putting all the code inside the main function
+                    becomes impossible to manage
+                </p>
+            </section>
+            <section>
+                <p>
+                    Functions provide us with a way to split our programs into small chunks that are easier to organize
+                    and reuse.
+                </p>
+            </section>
+            <section>
+                <p>
+                    We have already used some functions like
+                    <span class="important-text">sqrt()</span>. These are called
+                    <span class="important-text">built-in functions</span>, as they are part of C++
+                </p>
+                <p>Today, we will learn how to define and use our own functions</p>
+            </section>
+        </section>
+        <section>
+            <p>Example</p>
+            <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int square(int x) {
+	return x * x;
+}
+
+int main() {
+	for (int i = 1; i <= 10; i++) {
+		cout << i << "^2 = " << square(i) << endl;
+	}
+}
+            </script></code></pre>
+        </section>
+        <section>
+            <p>Functions with no return value (also called <span class="important-text">procedures</span>)</p>
+            <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+void printGreeting() {
+	cout << "Hello!" << endl;
+}
+
+int main() {
+	printGreeting();
+}
+            </script></code></pre>
+        </section>
+        <section>
+            <p>Function definition syntax</p>
+            <pre><code data-trim>
+                return_type|void identifier(formal_arguments) {
+                    function_body
+                }
+            </code></pre>
+        </section>
+        <section>
+            <p>Function calling syntax</p>
+            <pre><code data-trim>
+                function_name(actual_args);
+            </code></pre>
+        </section>
+        <section>
+            <p>The <span class="important-text">return </span>statement</p>
+            <p>It terminates the function and returns a value, which is the result of the function call</p>
+        </section>
+        <section>
+            <section>
+                <p>
+                    <span class="important-text">Declaring</span> vs. <span class="important-text">defining</span>
+                    functions
+                </p>
+            </section>
+            <section>
+                <p>A function can be declared an arbitrary number of times (0 or more)</p>
+                <p>However, it has to be defined <span class="important-text">once</span>,
+                    otherwise the code won't compile/link</p>
+            </section>
+            <section>
+                <p>Consider the following seemingly correct code</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int x;
+	cin >> x;
+	cout << square(x);
+}
+
+int square(int x) {
+	return x * x;
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>It does not compile</p>
+                <img data-src="../../../images/function_compilation_error.png" alt="Compilation error">
+                <p>
+                    The reason is that the compiler parses files sequentially, and when it reaches the function call square(x),
+                    it does not know what square is, because it has not been declared to exist yet.
+                </p>
+            </section>
+            <section>
+                <p>Solution #1: Move the whole definition before main</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int square(int x) {
+	return x * x;
+}
+
+int main() {
+	int x;
+	cin >> x;
+	cout << square(x);
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>Solution #2: Use a <span class="important-text">forward declaration</span></p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int square(int x);
+
+int main() {
+	int x;
+	cin >> x;
+	cout << square(x);
+}
+
+int square(int x) {
+	return x * x;
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>
+                    A <span class="important-text">forward declaration</span> allows us to tell the compiler of the
+                existence of an identifier, before actually defining it.
+                </p>
+                <p>
+                    After that, the linker cares to match the identifier with its definition (once it founds it)
+                </p>
+            </section>
+            <section>
+                <p>As one might suggest, if we erase the definition we will get a linker error</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int square(int x);
+
+int main() {
+	int x;
+	cin >> x;
+	cout << square(x);
+}
+                </script></code></pre>
+                <img data-src="../../../images/function_linker_error.png" alt="Linker error">
+            </section>
+            <section>
+                <p>The same thing would happen if we defined the function twice</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int square(int x);
+
+int main() {
+	int x;
+	cin >> x;
+	cout << square(x);
+}
+
+int square(int x) {
+	return x * x;
+}
+
+int square(int x) {
+	return x * x;
+}
+                </script></code></pre>
+                <img data-src="../../../images/function_linker_error_multiple_define.png" alt="Linker error">
+            </section>
         </section>
         <section>
             <p>That was it :)</p>

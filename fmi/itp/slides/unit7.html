@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Unit 7 - Characters and Strings</title>
+
+    <link rel="stylesheet" href="../revealjs/dist/reset.css">
+    <link rel="stylesheet" href="../revealjs/dist/reveal.css">
+    <link rel="stylesheet" href="../revealjs/dist/theme/black.css">
+    <link rel="stylesheet" href="../revealjs/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../../../styles/itp-fmi.css">
+    <script src="../revealjs/plugin/highlight/highlight.js"></script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Unit 7 - Characters and Strings</h2>
+            <img style="width: 640px; height: 320px" data-src="../../../images/bead_string.png" alt="Array logo">
+        </section>
+        <section>
+            <h3>Part 1 - Characters</h3>
+        </section>
+        <section>
+            <p>So far, we used data types to store conditions(bool), numbers (int, float, ...) and make calculations with them.</p>
+            <p>However, C++ allows us to store letters and text, as well</p>
+        </section>
+        <section>
+            <section>
+                <p>
+                    The <span class="important-text">char</span> data type has been designed
+                    to hold a single character.
+                </p>
+            </section>
+            <section>
+                <p>
+                    Remember that everything in the computer's memory is just binary bits. So, how are these characters
+                    stored?
+                </p>
+            </section>
+            <section>
+                <p>
+                    The truth is that characters are <span class="important-text">encoded</span> with the numbers 0-127.
+                </p>
+                <p>
+                    The mapping between a character and its number is defined in the
+                    <a target="_blank" href="https://www.asciitable.com/">ASCII table</a>
+                </p>
+            </section>
+            <section>
+                <p>
+                    ASCII codes <span class="important-text">0-31</span> are not printable and most of them are obsolete
+                </p>
+                <p>
+                    ASCII codes <span class="important-text">32-127</span> are the printable characters. For example,
+                    the letter A in ASCII is 65
+                </p>
+            </section>
+        </section>
+        <section>
+            <p>Char literals are always placed inside <span class="important-text">single quotes</span></p>
+            <pre><code data-trim>
+                    char capitalA = 'A'; // The capital letter A
+                    char capitalA2 = 65; // The same thing (65 gets converted to char, which is 65)
+                    cout << capitalA << " " << capitalA2 << endl; // Prints A A
+            </code></pre>
+        </section>
+        <section>
+            <p><span class="important-text">cin's << </span> operator also supports reading char variables</p>
+            <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	cout << "Enter a character: ";
+	char c;
+	cin >> c;
+	cout <<"You entered "<< c << "and its ASCII code is "<< (int)c << endl;
+}
+            </script></code></pre>
+        </section>
+        <section>
+            <section>
+                <p>What you saw in the previous example is called <span class="important-text">casting</span></p>
+                <p>It is a way of changing a variable's type to a new one</p>
+            </section>
+            <section>
+                <p>
+                    Type conversions in C++ can happen <span class="important-text">implicitly</span> and
+                    <span class="important-text">explicitly</span>.
+                </p>
+                <pre><code data-trim>
+               int a = 5;
+               float b = a; // Does not crash - a gets implicitly converted to float
+
+               float c = a / 10; // Does integer division
+               cout << c << endl; // Prints 0
+
+               c = (float)a / 10; // explicit conversion - does floating point division
+               cout << c << endl; // Prints 0.5
+            </code></pre>
+            </section>
+            <section>
+                <p>There are 5 types of casting in C++</p>
+                <ul>
+                    <li>C-style casts (what was in the previous code snippet)</li>
+                    <li>reinterpret_cast</li>
+                    <li>const_cast</li>
+                    <li>static_cast</li>
+                    <li>dynamic_cast</li>
+                </ul>
+                <p>And we will stay away from them for now :) </p>
+            </section>
+        </section>
+        <section>
+            <p>C++ defines char to always be 1 byte in size. It may be signed and unsigned.</p>
+            <p>Holding ASCII characters means we are interested in values 0-127, which means that both will suffice</p>
+        </section>
+        <section>
+            <section>
+                <p>
+                    There are some characters that have a special meaning. These are called
+                    <span class="important-text">escape sequences</span>
+                </p>
+                <p>
+                    They start with a
+                    <span class="important-text">\</span> character, and then following a letter or a number.
+                </p>
+                <p>
+                    We already used the
+                    <span class="important-text">\n</span> escape sequence, which represents a new line.
+                </p>
+            </section>
+            <section>
+                <p>Other notable escape sequences are</p>
+                <ul>
+                    <li><span class="important-text">\t</span> - horizontal tab</li>
+                    <li><span class="important-text">\'</span> - single quote</li>
+                    <li><span class="important-text">\"</span> - double quote</li>
+                    <li><span class="important-text">\\</span> - backslash</li>
+                </ul>
+            </section>
+            <section>
+                <p>The following code snippet</p>
+                <pre><code data-trim>
+cout << "\"This line is double-quoted\"\n";
+cout << "\'This line is single-quoted\'\n";
+cout << "\tThis line starts a bit further than the previous lines\n";
+                </code></pre>
+                <p>Prints</p>
+                <img data-src="../../../images/escape_sequence_print_result.png" alt="Print result">
+            </section>
+        </section>
+        <section>
+            <h3>Part 2 - Strings</h3>
+        </section>
+        <section>
+            <p>In order to work with text in programming, we use <span class="important-text">strings</span></p>
+            <p>A <span class="important-text">string</span> is just a sequence of characters</p>
+        </section>
+        <section>
+            <p>String literals are enclosed within double quotes and we have been using them quite a lot so far</p>
+            <pre><code data-trim>
+                cout << "I am a string" << endl;
+            </code></pre>
+        </section>
+        <section>
+            <section>
+                <p>
+                    In C++, strings are implemented as a character array, whose last symbol is the
+                    <span class="important-text">null terminator ('\0')</span>, which is the character with ASCII code 0
+                </p>
+            </section>
+            <section>
+                <p>Examples</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+int main() {
+	char str1[] = "ABCD"; // Automatically adds a null terminator
+	cout << strlen(str1) << endl; // Prints 4
+
+	char str2[5] = { 'A', 'B', 'C', 'D', '\0' };
+	cout << strlen(str2) << endl; // Prints 4
+
+	char notAString[] = { 'A', 'B', 'C', 'D'};
+	cout << strlen(notAString) << endl; // Prints 16 - why?
+
+	char s[4] = "ABCD"; // Does not compile
+
+	return 0;
+}
+                </script></code></pre>
+                <p>Memory layout</p>
+                <img data-src="../../../images/string_example_memory_layout.png" alt="Memory layout of the program">
+            </section>
+            <section>
+                <p>
+                    In the previous example we used the <span class="important-text">strlen</span> function from the
+                    <span class="important-text">cstring</span> library. The library contains other useful functions
+                    for strings, but it is better to try and implement them on your own.
+                </p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>All rules for arrays apply for strings as well. This means that</p>
+                <ul>
+                    <li>
+                        You can use the <span class="important-text">[]</span>
+                        operator to access/change a character by index
+                    </li>
+                    <li>You cannot compare strings with the <span class="important-text">==</span> operator,</li>
+                    <li>
+                        ...nor perform assignments between string with the
+                        <span class="important-text">=</span> operator
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <p>There are some exceptions, of course</p>
+                <pre><code>
+                    char str[] = "string";
+                    str[1] = 'p';
+                    cout << str; // Prints spring
+                </code></pre>
+                <p>The << operator of cout prints characters from a string until it encounters the null terminator</p>
+                <p>
+                    If you overwrite the null terminator in a string, cout will just keep printing everything in adjacent
+                    memory slots until it happens to hit a null byte.
+                </p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Reading strings from the console input</h3>
+            </section>
+            <section>
+                <p>We can use the << operator if we know how long it will be</p>
+                <pre><code data-trim>
+                char phoneNumber[16]; // 15 symbols for phone number and 1 for null terminator
+
+                cout << "Enter your phone number: ";
+                cin >> phoneNumber;
+                cout << "You entered: " << phoneNumber;
+            </code></pre>
+                <p>Don't do this: if the user enters more than 15 characters, the program could crash</p>
+            </section>
+            <section>
+                <p>A more secure option - <span class="important-text">cin.getline()</span></p>
+                <pre><code data-trim>
+                char phoneNumber[16]; // 15 symbols for phone number and 1 for null terminator
+
+                cout << "Enter your phone number: ";
+                cin.getline(phoneNumber, 16);
+                cout << "You entered: " << phoneNumber;
+            </code></pre>
+                <p>
+                    getline() will read up to 15 characters into phoneNumber and append a null terminator.
+                    Any excess characters will be discarded.</p>
+            </section>
+            <section>
+                <p>
+                    <span class="important-text">cin << </span> reads characters until a delimiter (space, tab, new line)
+                </p>
+                <p>
+                    <span class="important-text">cin.getline(str,n)</span> reads until a new line, but not more than n characters
+                </p>
+            </section>
+        </section>
+        <section>
+            <p>That was it :)</p>
+            <div id="last-page-nav">
+                <a href="#/0">First slide</a>
+                <a href="..">Course main page</a>
+                <a href="https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit7/problems.md">Problems</a>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="../revealjs/dist/reveal.js"></script>
+<script src="../revealjs/plugin/notes/notes.js"></script>
+<script src="../revealjs/plugin/markdown/markdown.js"></script>
+<script src="../revealjs/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
+</html>

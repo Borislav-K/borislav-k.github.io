@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Unit 8 - Multidimensional Arrays</title>
+
+    <link rel="stylesheet" href="../revealjs/dist/reset.css">
+    <link rel="stylesheet" href="../revealjs/dist/reveal.css">
+    <link rel="stylesheet" href="../revealjs/dist/theme/black.css">
+    <link rel="stylesheet" href="../revealjs/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../../../styles/itp-fmi.css">
+    <script src="../revealjs/plugin/highlight/highlight.js"></script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Unit 8 - Multidimensional Arrays</h2>
+            <img style="width: 640px; height: 320px" data-src="../../../images/2d_array_logo.jpg" alt="2D Array logo">
+        </section>
+        <section>
+            <p>The elements of an array can be of any data type, including arrays.</p>
+            <p>An array of arrays is called a <span class="important-text">multidimensional array</span></p>
+        </section>
+        <section>
+            <section>
+                <h3>Example</h3>
+                <pre><code data-trim>
+                int arr[2][3]; // A 2x3 2D array
+            </code></pre>
+                <p>
+                    In 2D arrays, it is convenient to think of the left index as being the row and the right as being the column
+                </p>
+            </section>
+            <section>
+                <p>
+                    Multidimensional arrays can be initialized with an initializer list. If done so, the first dimension can be omitted
+                </p>
+                <pre><code data-trim>
+	int arr[2][3] = { {1,2,3}, {4,5,6} };
+
+	int anotherArr[][3] = { {1,2,3}, {4,5,6}, {7,8,9} };
+
+	int yetAnotherArr[][4] = { {1}, {2,3}, {4,5,6}, {7,8,9,10} };
+            </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>We can access elements of multi-dimensional arrays the same way we did with 1D arrays</p>
+                <pre><code data-trim>
+    int yetAnotherArr[][4] = { {1}, {2,3}, {4,5,6}, {7,8,9,10} };
+
+	cout << yetAnotherArr[2][2] << endl; // Prints 6
+	cout << yetAnotherArr[2][3] << endl; // Prints 0
+	cout << yetAnotherArr[2][4] << endl; // Prints 7 :)
+	cout << yetAnotherArr[3][0] << endl; // Also prints 7
+                </code></pre>
+            </section>
+            <section>
+                <p>The reason why we got a 7 can be found in the memory representation of a 2D array</p>
+                <img data-src="../../../images/2d_array_memory.png" alt="2D array memory representation">
+                <p>The <span class="important-text">[2]</span> operation returns the third "row"</p>
+                <p>
+                    The <span class="important-text">[4]</span> operation overflows the row and returns
+                    the first element of the next row
+                </p>
+                <p>Do not write code like this :)</p>
+            </section>
+        </section>
+        <section>
+            <p>That was it :)</p>
+            <div id="last-page-nav">
+                <a href="#/0">First slide</a>
+                <a href="..">Course main page</a>
+                <a href="https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit8/problems.md">Problems</a>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="../revealjs/dist/reveal.js"></script>
+<script src="../revealjs/plugin/notes/notes.js"></script>
+<script src="../revealjs/plugin/markdown/markdown.js"></script>
+<script src="../revealjs/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
+</html>

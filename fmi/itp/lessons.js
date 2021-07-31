@@ -41,6 +41,12 @@ window.addEventListener('DOMContentLoaded', () => {
             title: "Characters and Strings",
             iconPath: "../../images/bead_string.png",
             problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit7/problems.md"
+        },
+        {
+            number: 8,
+            title: "Multidimensional arrays",
+            iconPath: "../../images/2d_array_logo.jpg",
+            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit8/problems.md"
         }
     ];
 

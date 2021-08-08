@@ -47,6 +47,12 @@ window.addEventListener('DOMContentLoaded', () => {
             title: "Multidimensional arrays",
             iconPath: "../../images/2d_array_logo.jpg",
             problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit8/problems.md"
+        },
+        {
+            number: 9,
+            title: "Pointers and References",
+            iconPath: "../../images/pointers_logo.png",
+            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit9/problems.md"
         }
     ];
 

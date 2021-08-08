@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Unit 9 - Pointers and References</title>
+
+    <link rel="stylesheet" href="../revealjs/dist/reset.css">
+    <link rel="stylesheet" href="../revealjs/dist/reveal.css">
+    <link rel="stylesheet" href="../revealjs/dist/theme/black.css">
+    <link rel="stylesheet" href="../revealjs/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="../../../styles/itp-fmi.css">
+    <script src="../revealjs/plugin/highlight/highlight.js"></script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>Unit 9 - Pointers and References</h2>
+            <img style="width: 640px; height: 320px" data-src="../../../images/pointers_logo.png" alt="2D Array logo">
+        </section>
+        <section>
+            <section>
+                <p>As previously stated, variables are named pieces of memory that hold a value</p>
+                <pre><code data-trim>
+                    int x = 5; // Reserves 4 bytes of memory and writes the value 5 there
+                </code></pre>
+                <p>Whenever the compiler encounters the variable in an expression, it maps it to its memory address</p>
+            </section>
+            <section>
+                <p>Variables are nice because we do not need to care where in memory the value is stored</p>
+                <p>
+                    We can just refer to the variable by its given identifier and the compiler will do the translation to the
+                    appropriate memory address for us automatically
+                </p>
+                <p>However, this approach has several limitations, which we will discuss later</p>
+            </section>
+        </section>
+        <section>
+            <p>
+                The <span class="important-text">address-of</span> operator (<span class="important-text">&</span>)
+            </p>
+            <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+
+int main() {
+	int a = 5;
+	std::cout << a << '\n'; // Prints 5
+	std::cout << &a << '\n'; // Prints 012FFB98 (on my machine)
+
+	return 0;
+}
+                </script></code></pre>
+            <p>It allows us to see which memory address has been assigned to the variable operand.</p>
+        </section>
+        <section>
+            <p>
+                The <span class="important-text">dereferencing</span> operator (<span class="important-text">*</span>)
+            </p>
+            <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+
+int main() {
+	int a = 5;
+	std::cout << a << '\n'; // Prints 5
+	std::cout << &a << '\n'; // Prints 012FFB98 (on my machine)
+  std::cout << *(&a) << '\n'; // Prints 5
+
+	return 0;
+}
+                </script></code></pre>
+            <p>It allows us to see what is the value at a particular memory address</p>
+        </section>
+        <section>
+            <section>
+                <p>
+                    A <span class="important-text">pointer</span> is a variable that holds a memory address as its value
+                </p>
+                <p>... and a memory address is just an integer ...</p>
+                <p>
+                    ... which means that pointers are basically integers
+                    whose operators are defined in a slightly different way
+                </p>
+            </section>
+            <section>
+                <p>Declaring and initializing pointers</p>
+                <pre><code data-trim data-line-numbers><script type="text/template">
+#include <iostream>
+
+int main() {
+	int var = 5;
+	int* ptrToVar = &var; // Create a integer pointer, whose value is the address of var
+
+	std::cout << var << '\n'; // Prints 5
+	std::cout << ptrToVar << '\n'; // Prints 00A8FD6C
+
+  return 0;
+}
+                </script></code></pre>
+                <img src="../../../images/pointer_memory_layout.png" alt="Pointers in memory">
+                <p class="important-text">Note that the asterisk is part of the type, not the dereference operator</p>
+            </section>
+            <section>
+                <img data-src="../../../images/pointer_memory_layout_schematic.png" alt="Pointer memory layout schematic">
+                <p>
+                    This is where the name <span class="important-text">pointer</span> comes from - it holds the memory
+                    address of var, therefore we could say that it <span class="important-text">points</span> to var
+                </p>
+            </section>
+            <section>
+                <p>The type of pointer has to match the type of variable being pointed to</p>
+                <pre><code data-trim>
+	int a = 5;
+	float b = 5.0f;
+
+	int* ptr1 = &a; // OK
+	float* ptr2 = &b; // OK
+	int* ptr3 = &b; // Does not compile
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <p>
+                An important remark - the address-of operator (&) does not return the address of a variable as a naked
+                integer
+            </p>
+            <p>
+                Actually, it returns a pointer to the variable, whose type is derived from the argument
+            </p>
+        </section>
+        <section>
+            <section>
+                <h3>Dereferencing pointers</h3>
+                <p>
+                    Once we have a pointer, we could <span class="important-text">dereference</span> it
+                    to get the value stored at the memory address to which it points
+                </p>
+                <pre><code data-trim>
+ int a = 5;
+	std::cout << a << '\n'; // Prints 5
+	std::cout << &a << '\n'; // Prints the address of a
+
+	int* ptr = &a;
+	std::cout << ptr << '\n'; // Prints the address of a
+	std::cout << *ptr << '\n'; // Prints 5
+                </code></pre>
+            </section>
+            <section>
+                <p>
+                    The <span class="important-text">*</span> operator is the reason why
+                    pointers need to have a type and cannot be plain integers.
+                </p>
+                <p>
+                    Without a type, the <span class="important-text">*</span> operator would not know how many bytes to
+                    fetch from the memory address. For example, the operator would fetch 4 bytes for an
+                    <span class="important-text">int*</span> and 1 byte for a <span class="important-text">char*</span>
+                </p>
+                <p>
+                    Also, without the type, the pointer would not know how to interpret the bytes at the memory address
+                </p>
+            </section>
+        </section>
+        <section>
+            <p>Pointers' values can be changed</p>
+            <pre><code data-trim>
+ int a = 1;
+	int b = 2;
+
+	int* ptr = &a;
+	std::cout << *ptr << '\n'; // Prints 1
+
+	ptr = &b;
+	std::cout << *ptr << '\n'; // Prints 2
+            </code></pre>
+        </section>
+        <section>
+            <section>
+                <p>A variable's value can be changed through a pointer to its memory address</p>
+                <pre><code data-trim>
+ int a = 1;
+	int* ptr = &a;
+	*ptr = 2;
+
+	std::cout << a << '\n'; // Prints 2
+            </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>Besides memory addresses, there is a special value that a pointer can hold:
+                    <span class="important-text">a null value</span>. It means that the pointer does not point to anything
+                </p>
+                <p>A pointer holding a null value is called a <span class="important-text">null pointer</span></p>
+            </section>
+            <section>
+                <p>In order to create a null pointer, just assign the literal 0 to it</p>
+                <pre><code data-trim>
+                    int* ptr = 0;
+                    cout << *ptr;// Undefined behaviour - usually crashes the program
+                </code></pre>
+            </section>
+            <section>
+                <p>The <span class="important-text">NULL</span> macro</p>
+                <p>
+                    There is a special preprocessor macro called NULL. In some cases it is defined as 0, in other cases
+                    as <span class="important-text">nullptr</span>, which is a keyword, same as the boolean true/false
+                </p>
+                <p>
+                    Use <span class="important-text">nullptr</span> instead of <span class="important-text">NULL</span>
+                    or 0 when initializing null pointers.
+                </p>
+                <p>For the curious:
+                    <a target="_blank" href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2007/n2431.pdf">here's why</a>
+                </p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>In C++, pointers and arrays are closely related</p>
+            </section>
+            <section>
+                <p>
+                    In most cases, the array variable gets implicitly converted to
+                    a pointer to the first element of the array
+                </p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int arr[3] = { 1,2,3 };
+	cout << &arr[0] << endl; // The address of the first element - prints 012FF810
+	cout << arr << endl; // The array gets implicitly converted to a pointer - prints 012FF810
+}
+                </script></code></pre>
+                <p>
+                    However, an array and a pointer to the array are <span class="important-text">not identical</span>.
+                    In the above case, the array is of type <span class="important-text">int[3]</span> with value the
+                    array elements themselves. A pointer to the array is of type
+                    <span class="important-text">int*</span> and its value is the address of the array's first element.
+                </p>
+            </section>
+            <section>
+                <p>Here's an example of how an array and the pointer to the array's first element are different entities</p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int arr[3] = { 1,2,3 };
+	int* ptr = arr; // arr gets implicitly converted to an int*
+	cout << sizeof(arr) << endl; // Prints 12
+	cout << sizeof(ptr) << endl; // Prints 4
+}
+                </script></code></pre>
+                <p>
+                    A fixed array knows the length of the array. A pointer to the array does not.
+                    It simply holds a memory address.
+                </p>
+            </section>
+            <section>
+                <p>
+                    In order to avoid copying large amounts of data, when an array is passed to a function it gets
+                    implicitly converted to a pointer
+                </p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+// The parameter int arr[] gets implicitly converted to int* arr
+void printSize(int arr[]) {
+	cout << sizeof(arr) << endl;
+}
+
+int main() {
+	int arr[3] = { 1,2,3 };
+	cout << sizeof(arr) << endl; // Prints 12
+	printSize(arr); // Prints 4
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>Since <span class="important-text">int[]</span> gets converted to
+                    <span class="important-text">int*</span>, the following 2 function signatures are equivalent
+                </p>
+                <ul>
+                    <li><span class="important-text">void printSize(int[] array)</span></li>
+                    <li><span class="important-text">void printSize(int* array)</span></li>
+                </ul>
+                <p>Using either of them is up to personal preference and established convention</p>
+            </section>
+            <section>
+                <p>The fact that arrays get implicitly converted to pointers when being passed to a function explains why
+                    changing an array within the function changes the actual array argument that was passed</p>
+                <p>A bit later we will see how we can change other types of variables being passed to functions
+                    (hint: it's almost the same)</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Pointer arithmetic</h3>
+                <p>In C++, you can add/subtract values from pointers</p>
+                <p>If <span class="important-text">ptr</span> points to a variable with size X, then
+                    <span class="important-text">ptr+1</span> points to the address pointed by
+                    <span class="important-text">ptr</span>, offset by X bytes</p>
+                <p>The same applies for <span class="important-text">ptr-1</span>, except the offset is in the other
+                    direction</p>
+            </section>
+            <section>
+                <p>Example</p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a = 5;
+	bool b = false;
+
+	cout << &a << endl; // Prints 0036FA6C
+	cout << &a + 1 << endl; // Prints 0036FA70, int's size is 4 bytes
+
+	cout << &b << endl; // Prints 0036FA63
+	cout << &b - 1 << endl; // Prints 0036FA62, bool's size is 1 byte
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>Reminder: arrays are represented by a continuous block of memory</p>
+                <p>This means that using a pointer to the array, we can iterate over it, without using the
+                    <span class="important-text">[]</span> operator</p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int arr[3] = { 1,2,3 };
+	int* ptr = arr;
+
+	cout << arr[0] << endl; // Prints 1
+	cout << *ptr << endl;  // Prints 1
+
+	cout << arr[1] << endl; // Prints 2
+	cout << *(ptr + 1) << endl; // Prints 2
+
+	cout << arr[2] << endl; // Prints 3
+	cout << *(ptr + 2) << endl; // Prints 3
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>In fact, the <span class="important-text">[]</span> operator automatically translates to pointer
+                    addition and dereferencing. It is just syntactic sugar for those 2 operations combined</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>Pointers and const</h3>
+                <p>So far, all the variables to which we pointed were non-constant. What happens in the other case?</p>
+            </section>
+            <section>
+                <pre><code data-trim>
+const int a = 5;
+int* ptr = &a; // Compilation error: Cannot convert from const int* to int*
+                </code></pre>
+                <p>
+                    This is used in order to protect the variable from being changed by dereferencing the pointer, thus
+                    violating the "constness" of the variable.
+                </p>
+            </section>
+            <section>
+                <p>To declare a <span class="important-text">pointer to a const value</span>, use the
+                    <span class="important-text">const</span> keyword before the data type</p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	const int a = 5;
+	const int* ptr = &a; // A pointer to a const value
+	cout << ptr << endl; // Prints 008FF6FC
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>We can also do the following</p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a = 5;
+	const int* ptr = &a; // Still works
+	a = 6; // OK
+	*ptr = 7; // Does not compile - a cannot be changed through ptr
+}
+                </script></code></pre>
+                <p>A pointer to a const value can point to a non-const variable. This way the variable is protected
+                    from being changed by dereferencing the pointer</p>
+            </section>
+            <section>
+                <p>We can still change what the pointer points to (its value)</p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a = 5;
+	int b = 6;
+	const int* ptr = &a;
+	ptr = &b; // Works
+
+	cout << *ptr << endl; // Prints 6
+}
+                </script></code></pre>
+                <p>Because the pointer, pointing to a const value is not const itself</p>
+            </section>
+            <section>
+                <p>
+                    We can also make the pointer itself a constant variable. A
+                    <span class="important-text">const pointer</span> is a pointer whose value cannot be changed (will
+                    point to the same address until it goes out of scope)
+                </p>
+                <p>
+                    To declare one, use the <span class="important-text">const</span> keyword
+                    between the pointer name and the <span class="important-text">*</span> symbol
+                </p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a = 5;
+	int b = 6;
+	int* const ptr = &a;
+	ptr = &b; // Does not compile - ptr is a const pointer
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>
+                    However, a const pointer is not a pointer that points to a const value, which means that the value
+                    it points to can be changed through the pointer
+                </p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a = 5;
+	int* const ptr = &a;
+	*ptr = 6;
+	cout << a << endl; // Prints 6
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>And the icing of the cake is - you've guessed it -
+                    <span class="important-text">a const pointer to a const value</span>
+                </p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a = 5;
+	int b = 6;
+	const int* const ptr = &a;
+	*ptr = 6; // Does not compile
+	ptr = &b; // Does not compile
+}
+                </script></code></pre>
+                <p>
+                    Do not worry if these seem a bit unnecessary - we will put them to use when discussing their applications
+                    in functions
+                </p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h3>References</h3>
+            </section>
+            <section>
+                <p>
+                    A <span class="important-text">reference</span> to a variable is declared by using the
+                    <span class="important-text">&</span> between the type and the name of the variable
+                </p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+using namespace std;
+
+int main() {
+	int a = 5;
+	int& aRef = a; // A reference to a
+
+	cout << a << endl; // Prints 5
+	cout << aRef << endl; // Prints 5
+
+	cout << &a << endl; // Prints 004FFA64
+	cout << &aRef << endl; // Prints 004FFA64
+}
+                </script></code></pre>
+                <p>So far, a reference seems to act as an alias for the variable it refers to. How is that useful?</p>
+            </section>
+            <section>
+                <p>Before we demonstrate the usefulness of references, we have to discuss
+                    <span class="important-text">l-values</span> and <span class="important-text">r-values</span>
+                </p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <p>Every C++ expression is either an <span class="important-text">l-value</span> or an
+                    <span class="important-text">r-value</span></p>
+            </section>
+            <section>
+                <p>
+                    An <span class="important-text">l-value</span> is an expression which has an address in memory. All
+                    variables are l-values.
+                </p>
+                <p>
+                    When we perform an assignment, the left side of the <span class="important-text">=</span> operator
+                    has to be an l-value.
+                </p>
+                <p>
+                    Therefore, a statement like
+                <pre><code data-trim>5 = 6;</code></pre>
+                will cause a compilation error, because 5 is an r-value
+                </p>
+            </section>
+            <section>
+                <p>
+                    An <span class="important-text">r-value</span> is the opposite type of expression. Examples are
+                    literals and other non-l-value expressions, such as 3+square(x)
+                </p>
+            </section>
+        </section>
+        <section>
+            <p>Some rules about references</p>
+            <ul>
+                <li>References have to be initialized when declared. There is no such thing as a null reference</li>
+                <li>
+                    References cannot be reassigned.
+                    Once initialized, they will refer to the same variable until they go out of scope
+                </li>
+            </ul>
+        </section>
+        <section>
+            <section>
+                <p>Say you wanted to write a function that swaps the values of 2 integers... Easy right?</p>
+                <pre><code data-trim>
+void swap(int a, int b) {
+	int x = a;
+	a = b;
+	b = x;
+}
+                </code></pre>
+            </section>
+            <section>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+
+void swap(int a, int b) {
+	int x = a;
+	a = b;
+	b = x;
+}
+
+int main() {
+	int a = 1;
+	int b = 2;
+
+	swap(a, b);
+
+	std::cout << a << ' ' << b << '\n'; // Prints 1 2
+}
+                </script></code></pre>
+                <p>Well... Why is that?</p>
+            </section>
+            <section>
+                <p>The reason is that when a function accepts variables as arguments, it makes local copies of them</p>
+                <p>This is called <span class="important-text">pass-by-value</span></p>
+                <p>
+                    Namely, the variable arguments' values are passed and copies are made - the variables themselves are
+                    left untouched
+                </p>
+            </section>
+            <section>
+                <p>This is a very limiting fact - we cannot create functions that perform any change on their arguments</p>
+            </section>
+            <section>
+                <p>Fortunately, we can use pointers as a workaround</p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+
+void swap(int* a, int* b) {
+	int x = *a;
+	*a = *b;
+	*b = x;
+}
+
+int main() {
+	int a = 1;
+	int b = 2;
+	swap(&a, &b);
+
+	std::cout << a << ' ' << b << '\n'; // Prints 2 1
+}
+                </script></code></pre>
+            </section>
+            <section>
+                <p>You might have struggled with understanding the last code snippet at first glance</p>
+                <p>
+                    The truth is that pointers make the code less readable. In order to fix this issue, we can use
+                    references
+                </p>
+            </section>
+            <section>
+                <p>The swap function with references instead</p>
+                <pre><code data-trim><script type="text/template">
+#include <iostream>
+
+void swap(int& a, int& b) {
+	int x = a;
+	a = b;
+	b = x;
+}
+
+int main() {
+	int a = 1;
+	int b = 2;
+	swap(a, b);
+
+	std::cout << a << ' ' << b << '\n'; // Prints 2 1
+}
+                </script></code></pre>
+                <p>But how does this work?</p>
+            </section>
+            <section>
+                <p>
+                    When a function accepts a reference to a variable as its argument, it does not perform copying of the
+                    variable and instead works with the passed variable itself. This is called
+                    <span class="important-text">pass by reference</span>
+                </p>
+                <p>
+                    The 2 positive outcomes of this concept is that we can change variables passed into functions, and
+                    we can improve performance/save memory by not copying the variables every time we call a function
+                </p>
+            </section>
+        </section>
+        <section>
+            <h3>References vs. Pointers</h3>
+            <p>A reference acts like a pointer which is automatically dereferenced when accessed</p>
+            <p>The truth is that references are usually implemented by the compiler as const pointers underneath</p>
+            <p>When possible, use references instead of pointers</p>
+        </section>
+        <section>
+            <section>
+                <h3>References and const</h3>
+            </section>
+            <section>
+                <p>Analogous to the pointer case, we can declare a
+                    <span class="important-text">reference to a const value</span>
+                </p>
+                <pre><code data-trim>
+                    const int a = 5;
+                    const int& aRef = a; // A reference to a constant value
+                </code></pre>
+                <p>
+                    A reference to a constant value is also called a <span class="important-text">const reference</span>
+                </p>
+            </section>
+            <section>
+                <p>
+                    <span class="important-text">Non-const references</span> can be initialized with non-const l-values
+                    only
+                </p>
+                <p><span class="important-text">Const references</span> can be initialized with</p>
+                <ul>
+                    <li>non-const l-values</li>
+                    <li>const l-values</li>
+                    <li>r-values</li>
+                </ul>
+            </section>
+            <section>
+                <p>Examples</p>
+                <pre><code data-trim>
+int main() {
+	int a = 5; // Non-const l-value
+	const int b = 6; // Const l-value
+
+	int& aRef = a; // OK - non-const reference to a non-const l-value
+	const int& aConstRef = a; // OK - const reference to a non-const l-value
+	const int& bRef = b; // OK - const reference to a const l-value
+	const int literalRef = 6; // OK - const reference to an r-value
+}
+                </code></pre>
+            </section>
+            <section>
+                <p>
+                    References used as function parameters can also be const. This allows us not to copy the argument and
+                    prevent the function from changing the value being referenced.
+                </p>
+                <pre><code data-trim>
+void increment(const int& x) {
+	x++; // Does not compile - Expression must be a modifiable l-value
+}
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <p>That was it :)</p>
+            <div id="last-page-nav">
+                <a href="#/0">First slide</a>
+                <a href="..">Course main page</a>
+                <a href="https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit9/problems.md">Problems</a>
+            </div>
+        </section>
+    </div>
+</div>
+<script src="../revealjs/dist/reveal.js"></script>
+<script src="../revealjs/plugin/notes/notes.js"></script>
+<script src="../revealjs/plugin/markdown/markdown.js"></script>
+<script src="../revealjs/plugin/highlight/highlight.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
+</html>

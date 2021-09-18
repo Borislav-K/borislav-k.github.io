@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Projects</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/projects.css">
+</head>
+<body>
+<header id="main-header">
+    <a href="index.html"><h1>Borislav Karapanov</h1></a>
+    <nav>
+        <ul id="navigation-list">
+            <li>
+                <a href="fmi/itp">FMI - Introduction to Programming</a>
+            </li>
+            <li>
+                <a href="projects.html">My Projects</a>
+            </li>
+            <li>
+                <a href="https://github.com/Borislav-K" target="_blank">Github</a>
+            </li>
+            <li>
+                <a href="https://www.linkedin.com/in/borislav-karapanov-9284ab173/" target="_blank">LinkedIn</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <header><h2>These are some of my software projects</h2></header>
+    <section id="projects-section">
+        <section class="project-instance-section">
+            <div>
+                <h3>Dungeons (A MMORPG/MOBA game in Java)</h3>
+                <p>
+                    Dungeons is a tiny multiplayer online game that supports up to 9 players simultaneously. The players
+                    can fight minions and each other, equip weapons, learn spells, collect treasures and trade with each other.
+                </p>
+                <p>
+                 <a href="https://github.com/Borislav-K/dungeons">Github Repository</a> - if you wish to try it yourself
+                    (contains installation instructions)
+                </p>
+            </div>
+        </section>
+        <section class="project-instance-section">
+            <div>
+                <h3>Analysis of Mandelbrot set scalability on a multi-core processor</h3>
+                <p>
+                    The Mandelbrot set's generation is a great way to demonstrate multi-core processors' scalability.
+                    This project demonstrates how the generation of the set is computed faster when using more threads.
+                    Furthermore, there are comments on how the speedup varies depending on different parameters,
+                    such as load balancing (the way the whole problem is separated into tasks for each thread) and
+                    granularity (number of tasks per thread). I developed it as a course project for the Distributed
+                    Software Architectures course at FMI.
+                </p>
+                <p>
+                 <a href="https://github.com/Borislav-K/Parallel-Mandelbrot-Set">Github Repository</a> - contains
+                    installation instructions and analysis of the speedup (the latter is in Bulgarian language only)
+                </p>
+            </div>
+        </section>
+        <section class="project-instance-section">
+            <div>
+                <h3>
+                    An online ZIP file->CSV converter
+                </h3>
+                <p>
+                    This is an online tool used to generate metadata about the contents of a zip archive. It has a user
+                    database and a history log, which allows users to download the metadata for their previous archives.
+                    It was developed for the Web Technologies course at FMI in collaboration with my colleague
+                    <a href="https://github.com/kirilkadoncheva">Kirilka Doncheva</a>.
+                </p>
+                <p>
+                    <a href="https://github.com/Borislav-K/web-project">Github Repository</a> - contains installation
+                    instructions
+                </p>
+                <p>
+                    <a href="https://zipcsvconv.herokuapp.com/login.php">Active Deployment</a> - if you wish to directly
+                    try it out
+                </p>
+            </div>
+        </section>
+        <section class="project-instance-section">
+            <h3>Some cool scenes I've created with THREE.js</h3>
+            <p>Click on the link above each scene to view in full screen mode</p>
+            <p>
+                For all the scenes I've created during the VR course at FMI,
+                check <a href="https://github.com/Borislav-K/fmi-VR">this repository</a>.
+            </p>
+            <div id="graphics-examples-container">
+                <div class="graphics-example">
+                    <a href="/fmi-VR/homework2/dices.html">Random dices tosser</a>
+                    <iframe src="fmi-VR/homework2/dices.html" title="Random dices tosser" width="400px"
+                            height="350px"></iframe>
+                </div>
+                <div class="graphics-example">
+                    <a href="/fmi-VR/exercise3/task6.html">Blazing sun</a>
+                    <iframe src="/fmi-VR/exercise3/task6.html" title="Blazing sun" width="400px" height="350px"></iframe>
+                </div>
+                <div class="graphics-example">
+                    <a href="/fmi-VR/exercise6/task1.html">Sporadic cube tower</a>
+                    <iframe src="/fmi-VR/exercise6/task1.html" title="Cube tower" width="400px" height="350px"></iframe>
+                </div>
+                <div class="graphics-example">
+                    <a href="/fmi-VR/other/aviopark.html">Plane park (for VR headset)</a>
+                    <iframe src="fmi-VR/other/aviopark.html" title="Plane park (stereo)" width="400px"
+                            height="350px"></iframe>
+                </div>
+                <div class="graphics-example">
+                    <a href="/fmi-VR/homework3/solution.html">Virtual cube (for VR headset)</a>
+                    <iframe src="fmi-VR/homework3/solution.html" title="Virtual cube (stereo)" width="400px"
+                            height="350px"></iframe>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>
+
+</body>
+</html>

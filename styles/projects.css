@@ -1,0 +1,31 @@
+h2 {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.project-instance-section a {
+    font-weight: bold;
+    color: darkorange;
+}
+
+.project-instance-section {
+    padding: 0.5rem;
+    border-top: 1px solid grey;
+}
+
+#graphics-examples-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 0.75rem;
+    row-gap: 1rem;
+}
+
+.graphics-example {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.graphics-example a {
+    margin-bottom: 0.25rem;
+}

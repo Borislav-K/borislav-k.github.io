@@ -10,49 +10,49 @@ window.addEventListener('DOMContentLoaded', () => {
             number: 2,
             title: "Introduction to C++",
             iconPath: "../../images/c++-logo.png",
-            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit2/problems.md",
+            problemsLink: "https://github.com/triffon/ip-2021-22/blob/master/practicum/4/unit2/problems.md",
         },
         {
             number: 3,
             title: "Conditional operators",
             iconPath: "../../images/control-flow.png",
-            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit3/problems.md"
+            problemsLink: "https://github.com/triffon/ip-2021-22/blob/master/practicum/4/unit3/problems.md"
         },
         {
             number: 4,
             title: "Loops",
             iconPath: "../../images/loop.png",
-            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit4/problems.md"
+            problemsLink: "https://github.com/triffon/ip-2021-22/blob/master/practicum/4/unit4/problems.md"
         },
         {
             number: 5,
             title: "Introduction to Functions",
             iconPath: "../../images/function_logo.png",
-            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit5/problems.md"
+            problemsLink: "https://github.com/triffon/ip-2021-22/blob/master/practicum/4/unit5/problems.md"
         },
         {
             number: 6,
             title: "Introduction to Arrays",
             iconPath: "../../images/arrays_logo.png",
-            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit6/problems.md"
+            problemsLink: "https://github.com/triffon/ip-2021-22/blob/master/practicum/4/unit6/problems.md"
         },
         {
             number: 7,
             title: "Characters and Strings",
             iconPath: "../../images/bead_string.png",
-            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit7/problems.md"
+            problemsLink: "https://github.com/triffon/ip-2021-22/blob/master/practicum/4/unit7/problems.md"
         },
         {
             number: 8,
             title: "Multidimensional arrays",
             iconPath: "../../images/2d_array_logo.jpg",
-            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit8/problems.md"
+            problemsLink: "https://github.com/triffon/ip-2021-22/blob/master/practicum/4/unit8/problems.md"
         },
         {
             number: 9,
             title: "Pointers and References",
             iconPath: "../../images/pointers_logo.png",
-            problemsLink: "https://github.com/Borislav-K/itp-fmi-2021/blob/main/unit9/problems.md"
+            problemsLink: "https://github.com/triffon/ip-2021-22/blob/master/practicum/4/unit9/problems.md"
         }
     ];
 

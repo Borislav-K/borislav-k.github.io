@@ -509,33 +509,6 @@ int main() {
             </section>
         </section>
         <section>
-            <section>
-                <p>Every C++ expression is either an <span class="important-text">l-value</span> or an
-                    <span class="important-text">r-value</span></p>
-            </section>
-            <section>
-                <p>
-                    An <span class="important-text">l-value</span> is an expression which has an address in memory. All
-                    variables are l-values.
-                </p>
-                <p>
-                    When we perform an assignment, the left side of the <span class="important-text">=</span> operator
-                    has to be an l-value.
-                </p>
-                <p>
-                    Therefore, a statement like
-                <pre><code data-trim>5 = 6;</code></pre>
-                will cause a compilation error, because 5 is an r-value
-                </p>
-            </section>
-            <section>
-                <p>
-                    An <span class="important-text">r-value</span> is the opposite type of expression. Examples are
-                    literals and other non-l-value expressions, such as 3+square(x)
-                </p>
-            </section>
-        </section>
-        <section>
             <p>Some rules about references</p>
             <ul>
                 <li>References have to be initialized when declared. There is no such thing as a null reference</li>
@@ -669,32 +642,6 @@ int main() {
                 <p>
                     A reference to a constant value is also called a <span class="important-text">const reference</span>
                 </p>
-            </section>
-            <section>
-                <p>
-                    <span class="important-text">Non-const references</span> can be initialized with non-const l-values
-                    only
-                </p>
-                <p><span class="important-text">Const references</span> can be initialized with</p>
-                <ul>
-                    <li>non-const l-values</li>
-                    <li>const l-values</li>
-                    <li>r-values</li>
-                </ul>
-            </section>
-            <section>
-                <p>Examples</p>
-                <pre><code data-trim>
-int main() {
-	int a = 5; // Non-const l-value
-	const int b = 6; // Const l-value
-
-	int& aRef = a; // OK - non-const reference to a non-const l-value
-	const int& aConstRef = a; // OK - const reference to a non-const l-value
-	const int& bRef = b; // OK - const reference to a const l-value
-	const int literalRef = 6; // OK - const reference to an r-value
-}
-                </code></pre>
             </section>
             <section>
                 <p>

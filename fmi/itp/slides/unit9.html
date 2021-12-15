@@ -500,34 +500,6 @@ int main() {
             <p>When possible, use references instead of pointers</p>
         </section>
         <section>
-            <section>
-                <h3>References and const</h3>
-            </section>
-            <section>
-                <p>Analogous to the pointer case, we can declare a
-                    <span class="important-text">reference to a const value</span>
-                </p>
-                <pre><code data-trim>
-                    const int a = 5;
-                    const int& aRef = a; // A reference to a constant value
-                </code></pre>
-                <p>
-                    A reference to a constant value is also called a <span class="important-text">const reference</span>
-                </p>
-            </section>
-            <section>
-                <p>
-                    References used as function parameters can also be const. This allows us not to copy the argument and
-                    prevent the function from changing the value being referenced.
-                </p>
-                <pre><code data-trim>
-void increment(const int& x) {
-	x++; // Does not compile - Expression must be a modifiable l-value
-}
-                </code></pre>
-            </section>
-        </section>
-        <section>
             <p>That was it :)</p>
             <div id="last-page-nav">
                 <a href="#/0">First slide</a>
